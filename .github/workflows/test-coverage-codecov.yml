@@ -18,10 +18,21 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run test:coverage
+      - name: Save coverage report artifact
+        if: ${{ matrix.node-version == (strategy.matrix.node-version[-1]) }} # latest
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage
   upload:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - name: Load coverage report artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage
       - name: Upload coverage reports to codecov.io
         uses: codecov/codecov-action@v5
         with:

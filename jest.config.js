@@ -8,7 +8,7 @@ export default {
     [
       'jest-junit',
       {
-        outputDirectory: './coverage',
+        outputDirectory: './test-results',
         outputName: 'junit.xml',
         suiteName: 'Jest Tests',
       },

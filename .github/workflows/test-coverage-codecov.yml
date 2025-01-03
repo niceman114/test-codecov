@@ -27,7 +27,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Upload test results to codecov.io
-        if: ${{ !cancelled() }}
+        if: ${{ matrix.node-version == '22.x' && !cancelled() }}
         uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
